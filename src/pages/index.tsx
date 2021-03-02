@@ -9,6 +9,7 @@ import { ChallengeBox } from '../components/ChallengeBox';
 import { CountdownProvider } from '../contexts/CountdownContext';
 import React from 'react';
 import { ChallengesProvider } from '../contexts/ChallengesContext';
+import Login from '../components/Login';
 
 interface HomeProps {
   level: number;
@@ -23,6 +24,7 @@ export default function Home(props: HomeProps) {
       currentExperience={props.currentExperience} 
       challengesCompleted={props.challengesCompleted}
     >
+      <Login />
       <div className={styles.container}>
         <Head>
           <title>Início | move.it</title>
