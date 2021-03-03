@@ -10,6 +10,7 @@ import { CountdownProvider } from '../contexts/CountdownContext';
 import React from 'react';
 import { ChallengesProvider } from '../contexts/ChallengesContext';
 import Login from '../components/Login';
+import { useSession } from 'next-auth/client';
 
 interface HomeProps {
   level: number;
@@ -18,33 +19,38 @@ interface HomeProps {
 }
 
 export default function Home(props: HomeProps) {
+  const [ session, loading ] = useSession()
   return (
     <ChallengesProvider 
       level={props.level} 
       currentExperience={props.currentExperience} 
       challengesCompleted={props.challengesCompleted}
     >
-      <Login />
-      <div className={styles.container}>
-        <Head>
-          <title>Início | move.it</title>
-        </Head>
-        <ExperienceBar />
-
-        <CountdownProvider>
-          <section>
-            <div>
-              <Profile />
-              <CompleteChallenges />
-              <Countdown />
-            </div>
-            <div>
-              <ChallengeBox />
-            </div>
-          </section>
-        </CountdownProvider>
-      </div>
-    </ChallengesProvider>
+      {!session ? (
+        <Login />
+      ) : (
+        <div className={styles.container}>
+          <Login />
+          <Head>
+            <title>Início | move.it</title>
+          </Head>
+          <ExperienceBar />
+  
+          <CountdownProvider>
+            <section>
+              <div>
+                <Profile />
+                <CompleteChallenges />
+                <Countdown />
+              </div>
+              <div>
+                <ChallengeBox />
+              </div>
+            </section>
+          </CountdownProvider>
+        </div>
+      )}
+      </ChallengesProvider>
   )
 }
 

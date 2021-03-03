@@ -1,13 +1,14 @@
+import { useSession } from 'next-auth/client';
 import { useContext } from 'react';
 import { ChallengesContext } from '../contexts/ChallengesContext';
 import styles from '../styles/components/Profile.module.css';
 
 export function Profile(){
   const { level } = useContext(ChallengesContext)
-
+  const [ session, loading ] = useSession()
   return(
     <div className={styles.profileContainer}>
-      <img src="https://github.com/dnldmp.png" alt="Danilo Dominoni"/>
+      <img src={`${session.user.image}`} alt="Danilo Dominoni"/>
       <div>
         <strong>Danilo Dominoni</strong>
         <p>
