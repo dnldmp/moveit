@@ -1,0 +1,53 @@
+.loginContainer{
+  display: flex;
+  height: 100vh;
+  background-color: #4953B8;
+  flex-direction: column;
+}
+
+.loginContainer main{
+  padding: 2rem, 2rem, 2rem, 0;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.loginContainer main div:first-child{
+  align-items: flex-start;
+}
+
+.loginContainer main div{
+  text-align: center;
+}
+
+.loginContainer main div:last-child img{
+  margin: 2rem 0 1rem;
+}
+
+.loginContainer main div:last-child p{
+  font-size: 1.5rem;
+  color: white;
+}
+
+.loginContainer main div:last-child div{
+  text-align: center;
+}
+
+.loginContainer main div:last-child div p{
+  font-size: 1rem;
+}
+
+.loginContainer button {
+  border: 0;
+  height: 3rem;
+  width: 15rem;
+  color: white;
+  background: var(--green);
+  margin-top: 2rem;
+}
+
+.loginContainer button:hover {
+  background: var(--blue);
+}
