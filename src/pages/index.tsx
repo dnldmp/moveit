@@ -1,56 +1,41 @@
-import { CompleteChallenges } from '../components/CompleteChallenges';
-import { Countdown } from '../components/Countdown';
-import { ExperienceBar } from '../components/ExperienceBar';
-import { Profile } from '../components/Profile';
-import styles from '../styles/pages/Home.module.css';
-import { GetServerSideProps } from 'next'
-import Head from 'next/head';
-import { ChallengeBox } from '../components/ChallengeBox';
-import { CountdownProvider } from '../contexts/CountdownContext';
-import React from 'react';
-import { ChallengesProvider } from '../contexts/ChallengesContext';
-import Login from '../components/Login';
+import { GetServerSideProps } from 'next';
 import { useSession } from 'next-auth/client';
-
-interface HomeProps {
+import React from 'react';
+import Login from '../components/Login';
+import Head from 'next/head';
+import { Menu } from '../components/Menu';
+import { ChallengesProvider } from '../contexts/ChallengesContext';
+import { Home } from './homePage';
+import styles from '../styles/pages/Tabs.module.css'
+interface TabsProps {
   level: number;
   currentExperience: number;
   challengesCompleted: number;
 }
 
-export default function Home(props: HomeProps) {
+
+export default function Tabs(props: TabsProps) {
   const [ session, loading ] = useSession()
   return (
-    <ChallengesProvider 
-      level={props.level} 
-      currentExperience={props.currentExperience} 
-      challengesCompleted={props.challengesCompleted}
-    >
+    <section>
+      <Head>
+        <title>Início | move.it</title>
+      </Head>
       {!session ? (
         <Login />
       ) : (
-        <div className={styles.container}>
-          <Login />
-          <Head>
-            <title>Início | move.it</title>
-          </Head>
-          <ExperienceBar />
-  
-          <CountdownProvider>
-            <section>
-              <div>
-                <Profile />
-                <CompleteChallenges />
-                <Countdown />
-              </div>
-              <div>
-                <ChallengeBox />
-              </div>
-            </section>
-          </CountdownProvider>
-        </div>
+        <ChallengesProvider 
+          level={props.level} 
+          currentExperience={props.currentExperience} 
+          challengesCompleted={props.challengesCompleted}
+        >
+          <div className={styles.tabsContainer}>
+            <Menu />
+            <Home />
+          </div>
+        </ChallengesProvider>
       )}
-      </ChallengesProvider>
+    </section>
   )
 }
 

@@ -1,0 +1,21 @@
+.menuContainer{
+  display: flex;
+  width: 5rem;
+  height: 100vh;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
+}
+
+.menuContainer::after{
+  display: grid;
+  grid-template-columns: 1fr;
+  flex: 1;
+}
+
+.menuContainer a{
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
